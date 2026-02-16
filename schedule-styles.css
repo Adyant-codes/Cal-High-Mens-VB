@@ -1,0 +1,307 @@
+/* ===================================
+   Schedule Page Specific Styles
+   =================================== */
+
+/* Page Header */
+.page-header {
+    margin-top: 70px;
+    padding: 80px 20px 60px;
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+    background-size: 100px 100px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.page-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    color: #000;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.page-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+}
+
+/* MaxPreps Header Button */
+.maxpreps-header-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    margin-top: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.maxpreps-header-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background-color: #ff8c00;
+    color: #fff;
+}
+
+.maxpreps-header-button:focus {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+.maxpreps-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Schedule Section */
+.schedule-section {
+    padding: 80px 20px;
+    background-color: #f8f8f8;
+}
+
+/* Schedule Grid */
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Schedule Box */
+.schedule-box {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.schedule-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.schedule-box-header {
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+    padding: 25px 30px;
+    text-align: center;
+}
+
+.schedule-box-header.varsity {
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+}
+
+.schedule-box-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.schedule-box-content {
+    padding: 30px;
+    min-height: 400px;
+}
+
+/* Schedule Placeholder */
+.schedule-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    min-height: 340px;
+}
+
+.placeholder-icon {
+    width: 80px;
+    height: 80px;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.placeholder-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.placeholder-subtext {
+    font-size: 0.95rem;
+    color: #999;
+    margin: 0;
+}
+
+/* Schedule Items (for when actual schedule is added) */
+.schedule-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.schedule-item:last-child {
+    border-bottom: none;
+}
+
+.schedule-item:hover {
+    background-color: #fff5e6;
+    transform: translateX(5px);
+}
+
+.schedule-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+    border-radius: 12px;
+    padding: 15px 10px;
+    color: #fff;
+}
+
+.date-month {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.date-day {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-top: 5px;
+}
+
+.schedule-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.schedule-opponent {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 5px 0;
+}
+
+.schedule-time {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+}
+
+/* ===================================
+   Responsive Design - Tablet
+   =================================== */
+
+@media (max-width: 1024px) {
+    .schedule-grid {
+        gap: 25px;
+    }
+}
+
+/* ===================================
+   Responsive Design - Mobile
+   =================================== */
+
+@media (max-width: 768px) {
+    .page-header {
+        padding: 60px 20px 40px;
+    }
+    
+    .maxpreps-header-button {
+        width: 100%;
+        max-width: 350px;
+        justify-content: center;
+    }
+    
+    .schedule-section {
+        padding: 60px 20px;
+    }
+    
+    .schedule-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .schedule-box-content {
+        padding: 25px;
+        min-height: 300px;
+    }
+    
+    .schedule-placeholder {
+        min-height: 240px;
+        padding: 30px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        margin-top: 60px;
+        padding: 50px 15px 30px;
+    }
+    
+    .schedule-box-header {
+        padding: 20px 25px;
+    }
+    
+    .schedule-box-title {
+        font-size: 1.5rem;
+    }
+    
+    .schedule-box-content {
+        padding: 20px;
+    }
+    
+    .placeholder-icon {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* ===================================
+   Accessibility
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .schedule-box,
+    .schedule-item,
+    .maxpreps-header-button {
+        transition: none;
+    }
+}

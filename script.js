@@ -7,22 +7,11 @@ const navLinks = document.querySelector('.nav-links');
 
 if (hamburger && navLinks) {
     hamburger.addEventListener('click', function() {
-        // Toggle active class on hamburger for animation
-        this.classList.toggle('active');
-        
-        // Toggle active class on nav links to show/hide menu
-        navLinks.classList.toggle('active');
-        
-        // Update aria-expanded attribute for accessibility
         const isExpanded = this.classList.contains('active');
-        this.setAttribute('aria-expanded', isExpanded);
-        
-        // Prevent body scroll when menu is open
-        if (isExpanded) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
+        this.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        this.setAttribute('aria-expanded', !isExpanded);
+        document.body.style.overflow = isExpanded ? '' : 'hidden';
     });
     
     // Close mobile menu when a nav link is clicked
@@ -34,6 +23,16 @@ if (hamburger && navLinks) {
             hamburger.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
         });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
     });
 }
 
@@ -66,75 +65,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===================================
-// Active Navigation Link on Scroll
-// ===================================
-
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    let current = '';
-    const navbarHeight = document.querySelector('.navbar').offsetHeight;
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - navbarHeight - 100;
-        const sectionHeight = section.offsetHeight;
-        
-        if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        const href = link.getAttribute('href');
-        if (href === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-}
-
-window.addEventListener('scroll', updateActiveNavLink);
-window.addEventListener('load', updateActiveNavLink);
-
-// ===================================
-// Hero Slideshow with Lazy Loading
+// Hero Slideshow
 // ===================================
 
 let currentSlideIndex = 0;
 const slides = document.querySelectorAll('.slide');
-const slideshowInterval = 5000; // 5 seconds
-
-// Lazy load background images for hero slideshow
-function lazyLoadSlideImages() {
-    slides.forEach((slide, index) => {
-        const bgImage = slide.getAttribute('data-lazy-bg');
-        if (bgImage) {
-            // Load first image immediately, others after a delay
-            if (index === 0) {
-                slide.style.backgroundImage = `url('${bgImage}')`;
-            } else {
-                setTimeout(() => {
-                    slide.style.backgroundImage = `url('${bgImage}')`;
-                }, index * 500); // Stagger loading
-            }
-        }
-    });
-}
+const slideshowInterval = 8000; // 8 seconds
+const transitionDuration = 1000; // 1 second fade
 
 // Initialize slideshow
 function initSlideshow() {
-    if (slides.length > 0) {
-        // Load images
-        lazyLoadSlideImages();
-        
+    if (slides.length > 1) {
         // Start automatic slideshow
         setInterval(() => {
+            // Remove active from current slide
             slides[currentSlideIndex].classList.remove('active');
             
+            // Move to next slide
             currentSlideIndex = (currentSlideIndex + 1) % slides.length;
             
+            // Add active to next slide
             slides[currentSlideIndex].classList.add('active');
+            
         }, slideshowInterval);
     }
 }
@@ -227,7 +179,6 @@ if (backToTopButton) {
 // Button and Link Hover Animations
 // ===================================
 
-// Add ripple effect to buttons (optional enhancement)
 function createRipple(event) {
     const button = event.currentTarget;
     
@@ -259,40 +210,6 @@ function createRipple(event) {
 const rippleButtons = document.querySelectorAll('.cta-button, .form-button, .social-button');
 rippleButtons.forEach(button => {
     button.addEventListener('click', createRipple);
-});
-
-// ===================================
-// Image Link Cards - Enhanced Hover Effect
-// ===================================
-
-const imageCards = document.querySelectorAll('.image-link-card');
-
-imageCards.forEach(card => {
-    // Add subtle parallax effect on mouse move
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const deltaX = (x - centerX) / centerX;
-        const deltaY = (y - centerY) / centerY;
-        
-        const image = card.querySelector('.image-placeholder');
-        if (image) {
-            image.style.transform = `scale(1.1) translate(${deltaX * 10}px, ${deltaY * 10}px)`;
-        }
-    });
-    
-    // Reset on mouse leave
-    card.addEventListener('mouseleave', () => {
-        const image = card.querySelector('.image-placeholder');
-        if (image) {
-            image.style.transform = 'scale(1.1)';
-        }
-    });
 });
 
 // ===================================
@@ -355,7 +272,6 @@ if (navLinks) {
 // Performance Optimization
 // ===================================
 
-// Debounce scroll events for better performance
 function debounce(func, wait = 10) {
     let timeout;
     return function executedFunction(...args) {
@@ -368,16 +284,10 @@ function debounce(func, wait = 10) {
     };
 }
 
-// Apply debouncing to scroll-based functions
-const debouncedActiveNav = debounce(updateActiveNavLink, 50);
-window.removeEventListener('scroll', updateActiveNavLink);
-window.addEventListener('scroll', debouncedActiveNav);
-
 // ===================================
 // Preload Critical Resources
 // ===================================
 
-// Preload hero images for faster display
 function preloadHeroImages() {
     const heroSlides = document.querySelectorAll('.slide[data-lazy-bg]');
     heroSlides.forEach((slide, index) => {
@@ -392,7 +302,6 @@ function preloadHeroImages() {
     });
 }
 
-// Call on page load
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', preloadHeroImages);
 } else {
@@ -406,7 +315,6 @@ if (document.readyState === 'loading') {
 const socialButtons = document.querySelectorAll('.social-button');
 
 socialButtons.forEach(button => {
-    // Add scale animation on hover
     button.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-3px) scale(1.08)';
     });
@@ -415,7 +323,6 @@ socialButtons.forEach(button => {
         this.style.transform = 'translateY(0) scale(1)';
     });
     
-    // Add active state animation
     button.addEventListener('mousedown', function() {
         this.style.transform = 'translateY(-1px) scale(1.05)';
     });

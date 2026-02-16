@@ -2,7 +2,7 @@
    CSS Reset & Base Styles
    =================================== */
 
-* {
+   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -60,8 +60,8 @@ button {
     top: 0;
     left: 0;
     right: 0;
-    background-color: #ff8c00;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #000;
+    box-shadow: 0 4px 25px rgba(255, 140, 0, 0.8);  /* Orange glow */
     z-index: 1000;
     padding: 0;
 }
@@ -73,7 +73,7 @@ button {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    height: 70px;
+    height: 80px;
 }
 
 .logo-placeholder {
@@ -82,7 +82,7 @@ button {
     justify-content: center;
     width: 60px;
     height: 60px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #ff8c00;
     border-radius: 8px;
     font-weight: 700;
     font-size: 12px;
@@ -97,7 +97,7 @@ button {
 }
 
 .nav-link {
-    color: #000;
+    color: #ff8c00;
     font-weight: 600;
     font-size: 16px;
     padding: 8px 16px;
@@ -106,7 +106,7 @@ button {
 }
 
 .nav-link:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 140, 0, 0.2);
 }
 
 .nav-link:focus {
@@ -115,8 +115,8 @@ button {
 }
 
 .nav-link.active {
-    background-color: #fff;
-    color: #ff8c00;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
 }
 
 /* Hamburger Menu (Mobile) */
@@ -134,9 +134,10 @@ button {
 }
 
 .hamburger-line {
-    width: 100%;
+    display: block;
+    width: 25px;
     height: 3px;
-    background-color: #000;
+    background-color: #ff8c00;
     border-radius: 3px;
     transition: all 0.3s ease;
 }
@@ -167,6 +168,7 @@ button {
     align-items: center;
     justify-content: center;
     margin-top: 70px;
+    background-color: #000;
 }
 
 /* Hero Slideshow */
@@ -189,23 +191,14 @@ button {
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .slide.active {
     opacity: 1;
-}
-
-/* Default background for slides before images load */
-.slide::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
-    z-index: -1;
+    z-index: 2;
 }
 
 /* Hero Overlay */
@@ -215,7 +208,7 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.47), rgba(0, 0, 0, 0.67));
     z-index: 2;
 }
 
@@ -230,17 +223,19 @@ button {
 }
 
 .hero-title {
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: clamp(3.52rem, 9.2vw, 7.2rem);
     font-weight: 800;
     color: #ff8c00;
     letter-spacing: 2px;
     margin-bottom: 20px;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-    line-height: 1.1;
+    text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.8),
+    4px 4px 8px rgba(0, 0, 0, 0.6);
+    line-height: 1.1
 }
 
 .hero-subtitle {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
     font-weight: 600;
     color: #fff;
     margin-bottom: 40px;
@@ -432,6 +427,15 @@ button {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 65% 40%;
+}
+
+.image-link-card:nth-child(1) .image-placeholder img {
+    object-position: 50% 71%;
+}
+
+.image-link-card:nth-child(3) .image-placeholder img {
+    object-position: 40% 10%;
 }
 
 .image-link-card:hover .image-placeholder {
@@ -627,57 +631,104 @@ button {
    =================================== */
 
 @media (max-width: 768px) {
-    /* Navigation - Mobile Menu */
+    /* Navigation - Full Screen Mobile Menu */
     .hamburger {
         display: flex;
+        z-index: 2000;
     }
-    
+
     .nav-links {
         position: fixed;
-        top: 70px;
+        top: 0;
         left: 0;
-        right: 0;
-        flex-direction: column;
-        background-color: #ff8c00;
-        padding: 20px;
-        gap: 0;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .nav-links.active {
-        transform: translateX(0);
-    }
-    
-    .nav-link {
         width: 100%;
-        text-align: center;
-        padding: 15px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        height: 100vh;
+        background-color: #000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 40px;
+        gap: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        z-index: 1500;
     }
-    
-    .nav-link:last-child {
-        border-bottom: none;
+
+    .nav-links.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 140, 0, 0.2);
+        transform: translateY(20px);
+        opacity: 0;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .nav-links.active li {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links.active li:nth-child(2) { transition-delay: 0.15s; }
+    .nav-links.active li:nth-child(3) { transition-delay: 0.2s; }
+    .nav-links.active li:nth-child(4) { transition-delay: 0.25s; }
+    .nav-links.active li:nth-child(5) { transition-delay: 0.3s; }
+    .nav-links.active li:nth-child(6) { transition-delay: 0.35s; }
+
+    .nav-link {
+        display: block;
+        width: 100%;
+        padding: 22px 0;
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        font-weight: 800;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background: transparent;
+        border-radius: 0;
+        text-align: left;
+    }
+
+    .nav-link:hover {
+        color: #ff8c00;
+        background: transparent;
+    }
+
+    .nav-link.active {
+        color: #ff8c00;
+        background: transparent;
+    }
+
+    .hamburger.active .hamburger-line {
+        background-color: #fff;
     }
     
     /* Hero Section */
     .hero {
-        min-height: 500px;
+        height: 75vh;
+        max-height: 650px;
+        min-height: unset;
     }
     
     .hero-title {
-        font-size: clamp(1.8rem, 7vw, 3rem);
+        font-size: clamp(1.8rem, 11.5vw, 3.5rem);
         letter-spacing: 1px;
+        word-break: keep-all;
+        white-space: normal;
     }
     
     .hero-subtitle {
-        font-size: clamp(1rem, 4vw, 1.4rem);
+        font-size: clamp(1.2rem, 4.5vw, 1.7rem);
     }
     
     .cta-button {
-        padding: 15px 30px;
-        font-size: 16px;
+        padding: 12px 24px;
+        font-size: 15px;
     }
     
     /* Sections */
@@ -760,7 +811,9 @@ button {
     
     .hero {
         margin-top: 60px;
-        min-height: 450px;
+        height: 70vh;
+        max-height: 600px;
+        min-height: unset;
     }
     
     .hero-title {
@@ -786,7 +839,6 @@ button {
    Accessibility & Focus States
    =================================== */
 
-/* Skip to main content link for screen readers */
 .skip-link {
     position: absolute;
     top: -40px;
@@ -802,14 +854,12 @@ button {
     top: 0;
 }
 
-/* Ensure all interactive elements have visible focus states */
 a:focus-visible,
 button:focus-visible {
     outline: 2px solid #ff8c00;
     outline-offset: 2px;
 }
 
-/* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -821,7 +871,6 @@ button:focus-visible {
     }
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
     .nav-link:hover,
     .nav-link:focus {
